@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace TimeTrackerBeta
 {
@@ -13,6 +14,9 @@ namespace TimeTrackerBeta
         //Streamwriter and Streamreader for file input and output.
         private StreamWriter writeToFile;
         private StreamReader readFromFile;
+        //Regular expression for input validation
+        private static string pattern = @"\d\d:\d\d:\d\d\.\d\d"; //\d represents any decimal value. \. is used because otherwise a period represents any character.
+        Regex correctFormat = new Regex(pattern);
 
         public MainForm()
         {
@@ -48,13 +52,13 @@ namespace TimeTrackerBeta
             //If the timer isn't started, start it. Otherwise, stop it.
             if (TimeTracker.Enabled == false)
             {
-                TimerButton.BackgroundImage = Image.FromFile(@"Images\ButtonStop.bmp");
+                TimerButton.BackgroundImage = Properties.Resources.ButtonStop;
                 TimeTracker.Start();
                 originalTime = TimeSpan.Parse(GetTimeFromTextBox()); //Obtains the original value in the textbox.
                 startTime = DateTime.Now; //Initializes the value of the variable when the timer starts.
             } else
             {
-                TimerButton.BackgroundImage = Image.FromFile(@"Images\ButtonStart.bmp");
+                TimerButton.BackgroundImage = Properties.Resources.ButtonStart;
                 TimeTracker.Stop();
             }
         }
@@ -92,6 +96,73 @@ namespace TimeTrackerBeta
             }
             AddTimes();
         }
+        //When each textbox control loses focus, it checks to see if the input is in a format the program can read.
+        private void SundayTime_Leave(object sender, EventArgs e)
+        {
+            if (!correctFormat.IsMatch(SundayTime.Text))
+            {
+                InvalidFormatErrorMessage();
+                SundayTime.Undo();
+            }
+        }
+        private void MondayTime_Leave(object sender, EventArgs e)
+        {
+            if (!correctFormat.IsMatch(MondayTime.Text))
+            {
+                InvalidFormatErrorMessage();
+                MondayTime.Undo();
+            }
+        }
+        private void TuesdayTime_Leave(object sender, EventArgs e)
+        {
+            if (!correctFormat.IsMatch(TuesdayTime.Text))
+            {
+                InvalidFormatErrorMessage();
+                TuesdayTime.Undo();
+            }
+        }
+        private void WednesdayTime_Leave(object sender, EventArgs e)
+        {
+            if (!correctFormat.IsMatch(WednesdayTime.Text))
+            {
+                InvalidFormatErrorMessage();
+                WednesdayTime.Undo();
+            }
+        }
+        private void ThursdayTime_Leave(object sender, EventArgs e)
+        {
+            if (!correctFormat.IsMatch(ThursdayTime.Text))
+            {
+                InvalidFormatErrorMessage();
+                ThursdayTime.Undo();
+            }
+        }
+        private void FridayTime_Leave(object sender, EventArgs e)
+        {
+            if (!correctFormat.IsMatch(FridayTime.Text))
+            {
+                InvalidFormatErrorMessage();
+                FridayTime.Undo();
+            }
+        }
+        private void SaturdayTime_Leave(object sender, EventArgs e)
+        {
+            if (!correctFormat.IsMatch(SaturdayTime.Text))
+            {
+                InvalidFormatErrorMessage();
+                SaturdayTime.Undo();
+            }
+        }
+        //Error message to display if input validation fails.
+        private void InvalidFormatErrorMessage()
+        {
+            string message = "Input is in invalid format. Please enter a time in \"00:00:00.00\" format.";
+            string caption = "Invalid format";
+            MessageBoxButtons buttons = MessageBoxButtons.OK;
+            MessageBoxIcon icon = MessageBoxIcon.Error;
+            MessageBox.Show(message, caption, buttons, icon);
+        }
+        //Input validation for textboxes.
         private string GetTimeFromTextBox()
         {
             //Logic structure checks which radio button is checked and returns text from the appropriate source.
@@ -189,6 +260,5 @@ namespace TimeTrackerBeta
         {
             this.Close();
         }
-
     }
 }

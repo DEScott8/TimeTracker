@@ -35,6 +35,7 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +57,7 @@
             this.ThursdayTime = new System.Windows.Forms.TextBox();
             this.FridayTime = new System.Windows.Forms.TextBox();
             this.SaturdayTime = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.totalLabel = new System.Windows.Forms.Label();
             this.Logo = new System.Windows.Forms.PictureBox();
             this.SaveDialog = new System.Windows.Forms.SaveFileDialog();
             this.LoadDialog = new System.Windows.Forms.OpenFileDialog();
@@ -67,6 +68,17 @@
             this.ThursdayLabel = new System.Windows.Forms.Label();
             this.FridayLabel = new System.Windows.Forms.Label();
             this.SaturdayLabel = new System.Windows.Forms.Label();
+            this.averageLabel = new System.Windows.Forms.Label();
+            this.AverageTime = new System.Windows.Forms.TextBox();
+            this.SundayReset = new System.Windows.Forms.Button();
+            this.MondayReset = new System.Windows.Forms.Button();
+            this.TuesdayReset = new System.Windows.Forms.Button();
+            this.WednesdayReset = new System.Windows.Forms.Button();
+            this.ThursdayReset = new System.Windows.Forms.Button();
+            this.FridayReset = new System.Windows.Forms.Button();
+            this.SaturdayReset = new System.Windows.Forms.Button();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.runningTotalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.SuspendLayout();
@@ -78,7 +90,7 @@
             this.supportToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(389, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(437, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -87,6 +99,9 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
             this.loadToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.exportToolStripMenuItem,
+            this.runningTotalToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -96,26 +111,33 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(97, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(228, 6);
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Enabled = false;
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.exportToolStripMenuItem.Text = "Export (Not yet implemented)";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -177,7 +199,7 @@
             // 
             // TotalTime
             // 
-            this.TotalTime.Location = new System.Drawing.Point(284, 310);
+            this.TotalTime.Location = new System.Drawing.Point(281, 293);
             this.TotalTime.Name = "TotalTime";
             this.TotalTime.ReadOnly = true;
             this.TotalTime.Size = new System.Drawing.Size(65, 20);
@@ -187,86 +209,79 @@
             // SundayButton
             // 
             this.SundayButton.AutoSize = true;
-            this.SundayButton.Enabled = false;
             this.SundayButton.Location = new System.Drawing.Point(195, 47);
             this.SundayButton.Name = "SundayButton";
             this.SundayButton.Size = new System.Drawing.Size(14, 13);
             this.SundayButton.TabIndex = 5;
             this.SundayButton.TabStop = true;
             this.SundayButton.UseVisualStyleBackColor = true;
-            this.SundayButton.Visible = false;
+            this.SundayButton.CheckedChanged += new System.EventHandler(this.SundayButton_CheckedChanged);
             // 
             // MondayButton
             // 
             this.MondayButton.AutoSize = true;
-            this.MondayButton.Enabled = false;
             this.MondayButton.Location = new System.Drawing.Point(195, 82);
             this.MondayButton.Name = "MondayButton";
             this.MondayButton.Size = new System.Drawing.Size(14, 13);
             this.MondayButton.TabIndex = 6;
             this.MondayButton.TabStop = true;
             this.MondayButton.UseVisualStyleBackColor = true;
-            this.MondayButton.Visible = false;
+            this.MondayButton.CheckedChanged += new System.EventHandler(this.MondayButton_CheckedChanged);
             // 
             // TuesdayButton
             // 
             this.TuesdayButton.AutoSize = true;
-            this.TuesdayButton.Enabled = false;
             this.TuesdayButton.Location = new System.Drawing.Point(195, 117);
             this.TuesdayButton.Name = "TuesdayButton";
             this.TuesdayButton.Size = new System.Drawing.Size(14, 13);
             this.TuesdayButton.TabIndex = 7;
             this.TuesdayButton.TabStop = true;
             this.TuesdayButton.UseVisualStyleBackColor = true;
-            this.TuesdayButton.Visible = false;
+            this.TuesdayButton.CheckedChanged += new System.EventHandler(this.TuesdayButton_CheckedChanged);
             // 
             // WednesdayButton
             // 
             this.WednesdayButton.AutoSize = true;
-            this.WednesdayButton.Enabled = false;
             this.WednesdayButton.Location = new System.Drawing.Point(195, 152);
             this.WednesdayButton.Name = "WednesdayButton";
             this.WednesdayButton.Size = new System.Drawing.Size(14, 13);
             this.WednesdayButton.TabIndex = 8;
             this.WednesdayButton.TabStop = true;
             this.WednesdayButton.UseVisualStyleBackColor = true;
-            this.WednesdayButton.Visible = false;
+            this.WednesdayButton.CheckedChanged += new System.EventHandler(this.WednesdayButton_CheckedChanged);
             // 
             // ThursdayButton
             // 
             this.ThursdayButton.AutoSize = true;
-            this.ThursdayButton.Enabled = false;
             this.ThursdayButton.Location = new System.Drawing.Point(195, 184);
             this.ThursdayButton.Name = "ThursdayButton";
             this.ThursdayButton.Size = new System.Drawing.Size(14, 13);
             this.ThursdayButton.TabIndex = 9;
             this.ThursdayButton.TabStop = true;
             this.ThursdayButton.UseVisualStyleBackColor = true;
-            this.ThursdayButton.Visible = false;
+            this.ThursdayButton.CheckedChanged += new System.EventHandler(this.ThursdayButton_CheckedChanged);
             // 
             // FridayButton
             // 
             this.FridayButton.AutoSize = true;
-            this.FridayButton.Enabled = false;
             this.FridayButton.Location = new System.Drawing.Point(195, 219);
             this.FridayButton.Name = "FridayButton";
             this.FridayButton.Size = new System.Drawing.Size(14, 13);
             this.FridayButton.TabIndex = 10;
             this.FridayButton.TabStop = true;
             this.FridayButton.UseVisualStyleBackColor = true;
-            this.FridayButton.Visible = false;
+            this.FridayButton.CheckedChanged += new System.EventHandler(this.FridayButton_CheckedChanged);
             // 
             // SaturdayButton
             // 
             this.SaturdayButton.AutoSize = true;
-            this.SaturdayButton.Enabled = false;
             this.SaturdayButton.Location = new System.Drawing.Point(195, 254);
             this.SaturdayButton.Name = "SaturdayButton";
             this.SaturdayButton.Size = new System.Drawing.Size(14, 13);
             this.SaturdayButton.TabIndex = 11;
             this.SaturdayButton.TabStop = true;
             this.SaturdayButton.UseVisualStyleBackColor = true;
-            this.SaturdayButton.Visible = false;
+            this.SaturdayButton.CheckedChanged += new System.EventHandler(this.SaturdayButton_CheckedChanged);
             // 
             // TuesdayTime
             // 
@@ -313,14 +328,14 @@
             this.SaturdayTime.Text = "00:00:00.00";
             this.SaturdayTime.Leave += new System.EventHandler(this.SaturdayTime_Leave);
             // 
-            // label1
+            // totalLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(195, 317);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "Total:";
+            this.totalLabel.AutoSize = true;
+            this.totalLabel.Location = new System.Drawing.Point(192, 300);
+            this.totalLabel.Name = "totalLabel";
+            this.totalLabel.Size = new System.Drawing.Size(34, 13);
+            this.totalLabel.TabIndex = 17;
+            this.totalLabel.Text = "Total:";
             // 
             // Logo
             // 
@@ -403,11 +418,119 @@
             this.SaturdayLabel.TabIndex = 25;
             this.SaturdayLabel.Text = "Saturday";
             // 
+            // averageLabel
+            // 
+            this.averageLabel.AutoSize = true;
+            this.averageLabel.Location = new System.Drawing.Point(192, 333);
+            this.averageLabel.Name = "averageLabel";
+            this.averageLabel.Size = new System.Drawing.Size(50, 13);
+            this.averageLabel.TabIndex = 26;
+            this.averageLabel.Text = "Average:";
+            // 
+            // AverageTime
+            // 
+            this.AverageTime.Location = new System.Drawing.Point(281, 330);
+            this.AverageTime.Name = "AverageTime";
+            this.AverageTime.Size = new System.Drawing.Size(65, 20);
+            this.AverageTime.TabIndex = 27;
+            this.AverageTime.Text = "00:00:00.00";
+            // 
+            // SundayReset
+            // 
+            this.SundayReset.Location = new System.Drawing.Point(359, 42);
+            this.SundayReset.Name = "SundayReset";
+            this.SundayReset.Size = new System.Drawing.Size(52, 23);
+            this.SundayReset.TabIndex = 28;
+            this.SundayReset.Text = "Reset";
+            this.SundayReset.UseVisualStyleBackColor = true;
+            this.SundayReset.Click += new System.EventHandler(this.SundayReset_Click);
+            // 
+            // MondayReset
+            // 
+            this.MondayReset.Location = new System.Drawing.Point(360, 75);
+            this.MondayReset.Name = "MondayReset";
+            this.MondayReset.Size = new System.Drawing.Size(51, 23);
+            this.MondayReset.TabIndex = 29;
+            this.MondayReset.Text = "Reset";
+            this.MondayReset.UseVisualStyleBackColor = true;
+            this.MondayReset.Click += new System.EventHandler(this.MondayReset_Click);
+            // 
+            // TuesdayReset
+            // 
+            this.TuesdayReset.Location = new System.Drawing.Point(360, 114);
+            this.TuesdayReset.Name = "TuesdayReset";
+            this.TuesdayReset.Size = new System.Drawing.Size(51, 23);
+            this.TuesdayReset.TabIndex = 30;
+            this.TuesdayReset.Text = "Reset";
+            this.TuesdayReset.UseVisualStyleBackColor = true;
+            this.TuesdayReset.Click += new System.EventHandler(this.TuesdayReset_Click);
+            // 
+            // WednesdayReset
+            // 
+            this.WednesdayReset.Location = new System.Drawing.Point(357, 146);
+            this.WednesdayReset.Name = "WednesdayReset";
+            this.WednesdayReset.Size = new System.Drawing.Size(53, 23);
+            this.WednesdayReset.TabIndex = 31;
+            this.WednesdayReset.Text = "Reset";
+            this.WednesdayReset.UseVisualStyleBackColor = true;
+            this.WednesdayReset.Click += new System.EventHandler(this.WednesdayReset_Click);
+            // 
+            // ThursdayReset
+            // 
+            this.ThursdayReset.Location = new System.Drawing.Point(355, 179);
+            this.ThursdayReset.Name = "ThursdayReset";
+            this.ThursdayReset.Size = new System.Drawing.Size(56, 23);
+            this.ThursdayReset.TabIndex = 32;
+            this.ThursdayReset.Text = "Reset";
+            this.ThursdayReset.UseVisualStyleBackColor = true;
+            this.ThursdayReset.Click += new System.EventHandler(this.ThursdayReset_Click);
+            // 
+            // FridayReset
+            // 
+            this.FridayReset.Location = new System.Drawing.Point(355, 213);
+            this.FridayReset.Name = "FridayReset";
+            this.FridayReset.Size = new System.Drawing.Size(56, 23);
+            this.FridayReset.TabIndex = 33;
+            this.FridayReset.Text = "Reset";
+            this.FridayReset.UseVisualStyleBackColor = true;
+            this.FridayReset.Click += new System.EventHandler(this.FridayReset_Click);
+            // 
+            // SaturdayReset
+            // 
+            this.SaturdayReset.Location = new System.Drawing.Point(355, 249);
+            this.SaturdayReset.Name = "SaturdayReset";
+            this.SaturdayReset.Size = new System.Drawing.Size(56, 23);
+            this.SaturdayReset.TabIndex = 34;
+            this.SaturdayReset.Text = "Reset";
+            this.SaturdayReset.UseVisualStyleBackColor = true;
+            this.SaturdayReset.Click += new System.EventHandler(this.SaturdayReset_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(269, 6);
+            // 
+            // runningTotalToolStripMenuItem
+            // 
+            this.runningTotalToolStripMenuItem.Enabled = false;
+            this.runningTotalToolStripMenuItem.Name = "runningTotalToolStripMenuItem";
+            this.runningTotalToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
+            this.runningTotalToolStripMenuItem.Text = "Running Total (Not Yet Implemented)";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 368);
+            this.ClientSize = new System.Drawing.Size(437, 368);
+            this.Controls.Add(this.SaturdayReset);
+            this.Controls.Add(this.FridayReset);
+            this.Controls.Add(this.ThursdayReset);
+            this.Controls.Add(this.WednesdayReset);
+            this.Controls.Add(this.TuesdayReset);
+            this.Controls.Add(this.MondayReset);
+            this.Controls.Add(this.SundayReset);
+            this.Controls.Add(this.AverageTime);
+            this.Controls.Add(this.averageLabel);
             this.Controls.Add(this.SaturdayLabel);
             this.Controls.Add(this.FridayLabel);
             this.Controls.Add(this.ThursdayLabel);
@@ -416,7 +539,7 @@
             this.Controls.Add(this.MondayLabel);
             this.Controls.Add(this.SundayLabel);
             this.Controls.Add(this.Logo);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.totalLabel);
             this.Controls.Add(this.SaturdayTime);
             this.Controls.Add(this.FridayTime);
             this.Controls.Add(this.ThursdayTime);
@@ -474,7 +597,7 @@
         private System.Windows.Forms.TextBox ThursdayTime;
         private System.Windows.Forms.TextBox FridayTime;
         private System.Windows.Forms.TextBox SaturdayTime;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label totalLabel;
         private System.Windows.Forms.PictureBox Logo;
         private System.Windows.Forms.SaveFileDialog SaveDialog;
         private System.Windows.Forms.OpenFileDialog LoadDialog;
@@ -485,6 +608,18 @@
         private System.Windows.Forms.Label ThursdayLabel;
         private System.Windows.Forms.Label FridayLabel;
         private System.Windows.Forms.Label SaturdayLabel;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.Label averageLabel;
+        private System.Windows.Forms.TextBox AverageTime;
+        private System.Windows.Forms.Button SundayReset;
+        private System.Windows.Forms.Button MondayReset;
+        private System.Windows.Forms.Button TuesdayReset;
+        private System.Windows.Forms.Button WednesdayReset;
+        private System.Windows.Forms.Button ThursdayReset;
+        private System.Windows.Forms.Button FridayReset;
+        private System.Windows.Forms.Button SaturdayReset;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem runningTotalToolStripMenuItem;
     }
 }
 
